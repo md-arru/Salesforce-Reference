@@ -1,0 +1,15 @@
+.THIS.container{
+    width: 100%;
+    /* background-color:#F6AE99; */
+    color: #333;
+    padding: 20px;
+    margin-left: 25%;
+    margin-top: 10%;
+}
+.THIS h1{
+    color: #fff;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

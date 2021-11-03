@@ -1,0 +1,19 @@
+.THIS.container{
+    width: 50%;
+    background-color:#A5A89E;
+    color: #333;
+    padding: 20px;
+    margin-left: 25%;
+  }
+
+.THIS h1{
+    color: #fff;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.THIS.myid{
+    margin-top: 20px;
+}

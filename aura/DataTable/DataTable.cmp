@@ -1,0 +1,65 @@
+<aura:component implements="force:appHostable">
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="selectedRowsCount" type="Integer" default="0"/>
+    <aura:attribute name="sortedBy" type="String"/>
+    <aura:attribute name="sortedDirection" type="String"/>
+    <aura:attribute name="defaultSortDirection" type="String"/>
+    <aura:attribute name="hideCheckboxColumn" type="Boolean" default="false"/>
+    <aura:attribute name="resizeColumnDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="items" type="Object" access="PRIVATE"/>
+    <aura:attribute name="selected" type="String" default=""/>
+
+    <aura:attribute name="gridColumns" type="List" access="PRIVATE" />
+    <aura:attribute name="gridData" type="Object" access="PRIVATE" />
+    <aura:attribute name="gridExpandedRows" type="List" access="PRIVATE" />
+
+    <aura:attribute name="isLoading" type="Boolean" default="false" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <!-- <lightning:button label="New" variant="brand" iconName="utility:add" />
+    <lightning:button label="Clear" variant="destructive" /> -->
+    <div class="input-group">
+        <lightning:input type="toggle" label="Hide Checkbox Column" name="inputSelectable" checked="{! v.hideCheckboxColumn }"/>
+    </div>
+    <div class="input-group">
+        <lightning:input type="toggle" label="Disable Column Resize" name="inputResizable" checked="{! v.resizeColumnDisabled }"/>
+    </div>
+                <div style="height: 300px">
+                    <h1>Selected Rows: {! v.selectedRowsCount }</h1>
+                    <lightning:datatable
+                        columns="{! v.columns }"
+                        data="{! v.data }"
+                        keyField="id"
+                        onrowaction="{!c.handleRowAction}"
+                        defaultSortDirection="{! v.defaultSortDirection }"
+                        onrowselection="{! c.updateSelectedText }"
+                        sortedDirection="{!v.sortDirection}"
+                        sortedBy="{!v.sortedBy}"
+                        hideCheckboxColumn="{! v.hideCheckboxColumn }"
+                        resizeColumnDisabled="{! v.resizeColumnDisabled }"
+                        onsort="{! c.updateColumnSorting }"
+                        />
+                </div>
+               
+        
+                <div>
+                    <lightning:tree items="{! v.items }" header="Roles" onselect="{! c.handleSelect }"/>
+                    <lightning:button iconName="utility:add" onclick="{! c.handleClick }" variant="brand" label="Add to Node 1" value="0"/>
+                    <div class="row">
+                        <lightning:input name="selectedItem" value="{! v.selected }" label="Selected Profile"/>
+                    </div>
+                </div>
+
+               
+
+                <div>
+                    <lightning:treeGrid
+                        columns="{! v.gridColumns }"
+                        data="{! v.gridData }"
+                        onrowaction="{!c.handleRowAction}"
+                        expandedRows="{! v.gridExpandedRows }"
+                        keyField="name"
+                    />
+                </div>
+
+</aura:component>

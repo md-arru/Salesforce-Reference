@@ -1,0 +1,71 @@
+<aura:component controller="ApexAuraCode" implements="force:appHostable">
+
+<!-- ATTRIBUTE DECLARATION -->
+    <aura:attribute name="conObj" type="Contact" default="{sObjectType:'contact'}"/>
+    <aura:attribute name="contactDataList" type="Object"/>
+    <aura:attribute name="listContacts" type="String[]" default="[]"/>
+    <aura:attribute name="columnsToDisplay" type="List"/>
+    <aura:attribute name="displayModal" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    
+	<!-- INPUT FIELDS -->
+        <lightning:input name="FirstName" label = "Enter Your First Name" value="{!v.conObj.FirstName}"/>
+        <lightning:input name="LastName" label="Enter Your Last Name" value="{!v.conObj.LastName}"/>
+        <lightning:input name="Email"  label="Enter Your Email" value="{!v.conObj.Email}"/>
+        <lightning:input name="Mobile" aura:id = "phoneId" maxlength="10"  label="Enter Your Mobile Number" value="{!v.conObj.MobilePhone}" />
+		<lightning:input name="Mailing Street" label="Enter Your Mailing Street" value="{!v.conObj.MailingStreet}"/>
+		<lightning:input name="Mailing City" label="Enter Your Mailing City" value="{!v.conObj.MailingCity}"/>
+		<lightning:input name="Mailing State" label="Enter Your Mailing State" value="{!v.conObj.MailingState}"/>
+		<lightning:input name="Mailing Country" label="Enter Your Mailing Country" value="{!v.conObj.MailingCountry}"/>
+		<lightning:input name="Mailing Postal Code" label="Enter Your Mailing Postal Code" value="{!v.conObj.MailingPostalCode}"/>
+    <br/>
+	
+	<!-- BUTTONS -->
+    <lightning:button  variant="destructive" label="Search" onclick="{!c.echo}"/>
+    <lightning:button  name="insertBtn" variant="success" label="Create" onclick="{!c.createContact}"/>
+    <lightning:button  variant="brand" label="Update" onclick="{!c.updateContact}"/>
+    <lightning:button  variant="destructive" label="Delete" onclick="{!c.deleteContact}"/>
+    <lightning:button  variant="brand-outline" label="Clear" onclick="{!c.clearForm}"/>
+    <lightning:button  name="caseBtn" variant="destructive-text" label="NewCase" onclick="{!c.newCase}"/>
+<br/>
+<hr/>
+
+ <!-- DIALOGBOX -->
+<aura:if isTrue="{!v.displayModal}">
+	<div>
+  		<section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+	    	<div class="slds-modal__container">
+	      	<header class="slds-modal__header">
+	        	<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.closeBtn}">
+	          	<lightning:icon iconName="utility:close" size="small" variant="neutral"/>
+	          	<span class="slds-assistive-text">Close</span>
+	        	</button>
+	      	</header>
+
+	        <div class="slds-modal__content slds-p-around_medium alignLeft" id="modal-content-id-1">
+	        	<p>Are you sure you want to delete the records??</p>
+	      	</div>
+	      	<footer class="slds-modal__footer">
+	        	<lightning:button label="Yes"
+	                    variant="brand" class="slds-m-top--medium"
+	                    onclick="{!c.yesBtn}"/>
+	          	<lightning:button label="No"
+	                    variant="brand" class="slds-m-top--medium"
+	                    onclick="{!c.noBtn}"/>
+	      	</footer>
+	    	</div>
+  		</section>
+  	<div class="slds-backdrop slds-backdrop_open"></div>
+	</div>
+</aura:if>
+
+<!-- DATATABLE -->
+    <lightning:datatable
+    data="{!v.contactDataList}"
+    columns="{!v.columnsToDisplay}"
+	selectedRows="{!v.rowSelection}"
+    onrowaction="{!c.handleRowAction}"
+    onrowselection="{!c.selectedrows}"
+    keyField="id" />
+</aura:component>

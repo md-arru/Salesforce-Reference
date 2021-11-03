@@ -1,0 +1,158 @@
+<aura:component implements="force:appHostable" controller="SignupForm">
+    <aura:attribute name="conObj" type="Contact" default="{sObjectType:'contact'}" />
+    <aura:attribute name="conLoginData" type="Contact" default="{sObjectType:'contact'}" />
+    
+    <aura:attribute name="columnsToDisplay" type="List" />
+    <aura:attribute name="caseData" type="Object" />
+    <aura:attribute name="fieldMap" type="Map" />
+
+    <aura:attribute name="option" type="List" default="[]" />
+    <aura:attribute name="selectCount" type="Case" default="{sObjectType:'Case'}"/>
+
+    <aura:attribute name="displayCase" type="Boolean" default="false" />
+    <aura:attribute name="displayModal" type="Boolean" default="false" />
+
+    <aura:attribute name="signUpModal" type="Boolean" default="false" />
+    <aura:attribute name="loginModal" type="Boolean" default="true" />
+
+    <aura:attribute name="options" type="List" default="[
+    {'label':'Male', 'value':'Male'},
+    {'label':'Female', 'value':'Female'},
+    {'label':'Others', 'value':'others'},
+    ]" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <lightning:notificationsLibrary aura:id="notifLib" />
+    <div class="container">
+
+        <!-- LOGINMODAL -->
+        <aura:if isTrue="{!v.loginModal}">
+            <div class="loginForm">
+                <div class="form">
+                    <div class="slds-page-header" style="margin-bottom: 2px;text-align: center; font-size: 30px;">
+                        <b>Login Form</b>
+                    </div>
+                </div>
+                <lightning:input name="Username" value="{!v.conLoginData.Username__c}" label="Username"
+                    placeholder="Enter your Username..." />
+
+                <lightning:input name="Password" type="password" value="{!v.conLoginData.Password__c}" label="Password"
+                    placeholder="Enter your Password" />
+                <br />
+                <!-- <a onclick="{!c.forgotPwd}">Forget Password?</a> -->
+                <div class="slds-align_absolute-center top">
+
+                    <lightning:button variant="success" label="Login" title="Brand action" onclick="{!c.loginForm }" />
+
+                    <lightning:button variant="destructive" label="SignUp" title="Brand action"
+                        onclick="{!c.signUpForm }" />
+                </div>
+            </div>
+        </aura:if>
+    </div>
+
+    <!-- SIGNUPMODAL -->
+    <aura:if isTrue="{!v.signUpModal}">
+        <div>
+            <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick="{!c.closeBtn}">
+                            <lightning:icon iconName="utility:close" size="small" variant="neutral" />
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium alignLeft" id="modal-content-id-1">
+                        <div class="for">
+                            <div class="slds-page-header"
+                                style="margin-bottom: 2px;text-align: center; font-size: 30px;">
+                                <b>SignUp Form</b>
+                            </div>
+                            <lightning:input name="FirstName" value="{!v.conObj.FirstName}" label="First Name"
+                                placeholder="Enter your Firstname..." />
+
+                            <lightning:input name="LastName" value="{!v.conObj.LastName}" label="Last Name"
+                                placeholder="Enter your Lastname..." />
+
+                            <lightning:input name="UserName" value="{!v.conObj.Username__c}" label="Username"
+                                placeholder="Enter your Username..." />
+
+                            <lightning:input name="Password" type="password" value="{!v.conObj.Password__c}"
+                                label="Password" />
+
+                            <lightning:input type="email" name="Email" value="{!v.conObj.Email}" label="Email"
+                                placeholder="Enter your Email..." />
+
+                            <lightning:input name="Mobile" type="tel" value="{!v.conObj.Phone}" label="Mobile"
+                                maxlength="10" />
+
+                            <lightning:combobox name="general" label="Account" placeholder="Select an Account"
+                                options="{!v.fieldMap}" value="{!v.cont.AccountId}" />
+
+                            <div style="max-width: 400px;">
+                                <lightning:inputAddress addressLabel="Mailing Address" streetLabel="Street"
+                                    cityLabel="City" countryLabel="Country" provinceLabel="Province"
+                                    postalCodeLabel="PostalCode" street="{!v.conObj.MailingStreet}"
+                                    city="{!v.conObj.MailingCity}" country="{!v.conObj.MailingCountry}"
+                                    province="{!v.conObj.MailingState}" postalCode="{!v.conObj.MailingPostalCode}"
+                                    aura:id="addresss" fieldLevelHelp="Enter the address" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="slds-modal__footer">
+                        <div class="slds-align_absolute-center top">
+                            <lightning:button label="Save" variant="brand" class="slds-m-top--medium"
+                                onclick="{!c.createContact}" />
+                            <lightning:button label="Cancel" variant="destructive" class="slds-m-top--medium"
+                                onclick="{!c.noBtn}" />
+                        </div>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+
+    <!-- DATATABLE -->
+    <aura:if isTrue="{!v.displayCase}">
+        <div style="border: 3px solid black; height: 400px;">
+            <lightning:datatable data="{!v.caseData}" columns="{!v.columnsToDisplay}" selectedRows="{!v.rowSelect}"
+                onrowaction="{!c.handleRowAction}" onrowselection="{! c.updateSelectedText }" keyField="id" />
+            <lightning:button label="Cancel" variant="destructive" class="slds-m-top--medium"
+                onclick="{!c.closeCaseDataTable}" />
+        </div>
+    </aura:if>
+
+    
+ <!-- DIALOGBOX -->
+<aura:if isTrue="{!v.displayModal}">
+	<div>
+  		<section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+	    	<div class="slds-modal__container">
+	      	<header class="slds-modal__header">
+	        	<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.closeBtn}">
+	          	<lightning:icon iconName="utility:close" size="small" variant="neutral"/>
+	          	<span class="slds-assistive-text">Close</span>
+	        	</button>
+	      	</header>
+
+	        <div class="slds-modal__content slds-p-around_medium alignLeft" id="modal-content-id-1">
+	        	<p>Are you sure you want to delete the case records??</p>
+	      	</div>
+	      	<footer class="slds-modal__footer">
+	        	<lightning:button label="Yes"
+	                    variant="brand" class="slds-m-top--medium"
+	                    onclick="{!c.yesBtn}"/>
+	          	<lightning:button label="No"
+	                    variant="brand" class="slds-m-top--medium"
+	                    onclick="{!c.noDelBtn}"/>
+	      	</footer>
+	    	</div>
+  		</section>
+  	<div class="slds-backdrop slds-backdrop_open"></div>
+	</div>
+</aura:if>
+</aura:component>

@@ -1,0 +1,34 @@
+<aura:component implements = "force:appHostable">
+  
+    <aura:attribute name="contact" type="sObject" default="{'firstName':'','lastName':'','email':'','mobileNo':'','landlineNo':''}" />
+    <aura:attribute name="address" type="sObject" default="{'street':'','city':'','country':'','province':'','postalCode':''}"/>
+    <aura:attribute name="options" type="List" default="[
+    {'label':'Male', 'value':'Male'},
+    {'label':'Female', 'value':'Female'},
+    {'label':'Others', 'value':'others'},
+    ]"/>
+
+    <div class="container">
+        <h1>Contact Form</h1>
+    <lightning:input name="FirstName" value="{!v.contact.firstName}"  label="First Name" aura:id="fNameId" placeholder="Enter your Firstname..." onblur="!c.myfunction" />
+
+    <lightning:input name="LastName" value="{!v.contact.lastName}"  aura:id="lNameId" label="Last Name" placeholder="Enter your Lastname..." messageWhenValueMissing="Please enter a Last name its Mandatory"/>
+    
+    <lightning:combobox name="gender" label="Gender" placeholder="Select Gender" options="{!v.options}" onchange="{!c.handleChange}"/>
+
+    <lightning:input name="Mobile" type="tel" value="{!v.contact.mobileNo}" label="Mobile" aura:id="mobileId" pattern="[0-9]{10}"  placeholder="Enter a 10 digits" messageWhenPatternMismatch="Please enter a 10 digits" maxlength="10"/>
+
+    <lightning:input type="email" name="Email" value="{!v.contact.email}" label="Email" aura:id="emailId" placeholder="Enter your Email..." required="true" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" messageWhenTypeMismatch = "Please enter Valid Email" messageWhenValueMissing="Please enter Valid Email"/>
+
+    <lightning:input name="Landline" type="tel" aura:id="landlineId" value="{!v.contact.landlineNo}" label="Landline number"  fieldLevelHelp="Example : (212-84245235)" messageWhenPatternMismatch="Please enter a correct pattern xxx-xxxxxxxx"/>
+    
+    <lightning:inputAddress addressLabel="Address" streetLabel="Street" cityLabel="City" countryLabel="Country"
+    provinceLabel="Province" postalCodeLabel="PostalCode" street="{!v.address.street}" city="{!v.address.city}"
+    country="{!v.address.country}" province="{!v.address.province}" postalCode="{!v.address.postalCode}" aura:id="address" fieldLevelHelp="Enter the address" required="true"/>
+    <div class="slds-align_absolute-center top">
+        <lightning:button variant="brand"  iconName="utility:adduser" label="Save" title="Brand action" onclick="{!c.saveContact}" />
+        <lightning:button variant="destructive" iconName="utility:close" type="reset" label="Cancel" title="Destructive action" />
+    </div>
+</div>
+
+</aura:component>

@@ -1,0 +1,18 @@
+<aura:component implements="force:appHostable">
+    <lightning:notificationsLibrary aura:id="notifLib" />
+    <div class="container">
+        <h1>Contact Form - Validation</h1>
+        <lightning:recordEditForm objectApiName="Contact" aura:id="formValidation" onsubmit="{!c.handleSubmit}" density="compfy">
+            <lightning:messages aura:id = "ErrorMessage" />
+            <lightning:inputField aura:id="newContactField" fieldName="FirstName" />
+            <lightning:inputField aura:id="newContactField" fieldName="LastName" />
+            <lightning:inputField aura:id="newContactField" fieldName="Email" />
+            <lightning:inputField  aura:id="newContactField" fieldName="MobilePhone" />
+            <lightning:inputField aura:id="newContactField" fieldName="HomePhone" />
+            <div class="slds-align_absolute-center top">
+                <lightning:button class="slds-m-top_small" variant="brand" type="submit" label="Create" />
+                <lightning:button class="slds-m-top_small" variant="destructive" type="submit" onclick="{!c.handlereset}" label="Cancel" />
+            </div>
+        </lightning:recordEditForm>
+    </div>
+</aura:component>

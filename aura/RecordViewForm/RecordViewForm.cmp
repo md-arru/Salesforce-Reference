@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableforRecordHome,force:appHostable" access="global">
+    <lightning:layout verticalAlign="stretch" multipleRows="true" class="large">
+            <lightning:layoutItem flexibility="auto" padding="horizontal-medium" class="custom-box">
+                <div style="background-color: #4B3869;">
+                    <h1>Updating a Record</h1>
+                    <lightning:card footer="Update Record" title="Update Record">
+                        <p class="slds-p-horizontal_small">
+                            <lightning:recordViewForm recordId="a025g000005gU2PAAU" objectApiName="Travelling_Details__c">
+                                <div class="slds-box">
+                                    <lightning:outputField fieldName="Employees__c" />
+                                    <lightning:outputField fieldName="PickUp_Location__c" />
+                                    <lightning:outputField fieldName="PickUp_Location__c" />
+                                    <lightning:outputField fieldName="Route__c" />
+                                </div>
+                            </lightning:recordViewForm>
+                        </p>
+                    </lightning:card>
+                </div>
+            </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

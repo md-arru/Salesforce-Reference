@@ -1,0 +1,62 @@
+<aura:component implements="flexipage:availableforRecordHome,force:appHostable" access="global">
+    <lightning:notificationsLibrary aura:id="notifLib" />
+    <div class="c-container">
+    <lightning:layout verticalAlign="stretch" multipleRows="true" class="large">
+        <lightning:layoutItem flexibility="auto" padding="horizontal-medium" class="custom-box">
+            <div style="background-color: #4B3869;">
+                <h1>Updating a Record</h1>
+                <lightning:card footer="Update Record" title="Update Record">
+                    <p class="slds-p-horizontal_small">
+                        <lightning:recordEditForm recordId="0035g00000EM69hAAD" objectApiName="Contact" onsuccess="{!c.handlesuccess}">
+                            <lightning:messages />
+                            <lightning:outputField fieldName="AccountId" />
+                            <lightning:inputField fieldName="FirstName" />
+                            <lightning:inputField fieldName="LastName" />
+                            <lightning:inputField fieldName="Email" />
+                            <lightning:notificationsLibrary aura:id="notify"/>
+                    <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update" onclick="{!c.showToast}"/>
+                    
+                        </lightning:recordEditForm>
+                    </p>
+                </lightning:card>
+            </div>
+        </lightning:layoutItem>
+
+        <lightning:layoutItem flexibility="auto" padding="horizontal-medium" class="custom-box">
+            <div style="background-color: #4B3869;">
+                <h1>Creating a Record</h1>
+                <lightning:card footer="Creating Vehicle " title="Create Vehicle">
+                    <p class="slds-p-horizontal_small">
+                        <lightning:recordEditForm aura:id="recordEditForm" objectApiName="vehicle__c" onsuccess="{!c.handlesuccess}">
+                            <lightning:messages />
+                                    <lightning:inputField aura:id="field" fieldName="Name" />
+                                    <lightning:inputField aura:id="field" fieldName="Registration_No__c" />
+                                    <lightning:inputField aura:id="field" fieldName="Total_Available_Seats__c" />
+                                    <lightning:notificationsLibrary aura:id="notify"/>
+                                    <lightning:button class="slds-m-top_small" variant="brand" type="submit" label="Create new" onclick="{!c.handlesubmit}" />
+                                    <lightning:button class="slds-m-top_small" variant="destructive"  onclick="{!c.handlereset}" label="Cancel" />
+                        </lightning:recordEditForm>
+                    </p>
+                </lightning:card>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+<hr/>
+    <lightning:layout verticalAlign="stretch" multipleRows="true" class="large">
+        <lightning:layoutItem flexibility="auto" padding="horizontal-medium" class="custom-box">
+            <div style="background-color: #4B3869;">
+                <h1>Creating a Routes </h1>
+                <lightning:card footer="Creating Prepopulating vehicle Route " title="Create Vehicle">
+                    <p class="slds-p-horizontal_small">
+                        <lightning:recordEditForm objectApiName="vehicle_Routes__c">
+                            <lightning:messages />
+                            <lightning:inputField fieldName="Routes__c" value="Beach-Velacherry" />
+                            <lightning:button class="slds-m-top_small" variant="brand" type="submit" label="Create new" />
+                        </lightning:recordEditForm>
+                    </p>
+                </lightning:card>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+</div>
+</aura:component>

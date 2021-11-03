@@ -1,0 +1,61 @@
+<aura:component implements="flexipage:availableforRecordHome,force:appHostable" access="global">
+    <aura:attribute name="fields" type="String[]"
+        default="['Driver__c','Driver_Email__c','Employee_Name__c','Employee_Email__c','Schedule_Time__c','Travelling_Detail__c','vehicle__c']" />
+    <lightning:notificationsLibrary aura:id="notifLib" />
+    <div class="c-container">
+        <lightning:layout verticalAlign="stretch" multipleRows="true" class="x-large">
+            <lightning:layoutItem flexibility="auto" padding="horizontal-medium" class="custom-box">
+                <div style="background-color: #4B3869;">
+                    <h1>Contact Form</h1>
+                    <lightning:card footer="Contact" title="My Contacts">
+                        <p class="slds-p-horizontal_small">
+                            <lightning:recordForm objectApiName="Contact" layoutType="Full"
+                                recordId="0035g00000EMESHAA5" mode="readonly" columns="2" />
+                        </p>
+                    </lightning:card>
+                </div>
+            </lightning:layoutItem>
+
+            <lightning:layoutItem flexibility="auto" padding="horizontal-medium" class="custom-box">
+                <div style="background-color: #4B3869;">
+                    <h1>Vehicle</h1>
+                    <lightning:card footer="Vehicle" title="My Vehicle">
+                        <p class="slds-p-horizontal_small">
+                            <lightning:recordForm objectApiName="vehicle__c" layoutType="compact" mode="edit"
+                                columns="1" />
+                        </p>
+                    </lightning:card>
+                </div>
+            </lightning:layoutItem>
+
+        </lightning:layout>
+        <hr />
+        <lightning:layout verticalAlign="stretch" multipleRows="true" class="x-large">
+            <lightning:layoutItem flexibility="auto" padding="horizontal-medium" class="custom-box">
+                <div style="background-color: #6F69AC;">
+                    <h1>Travelling Details</h1>
+                    <lightning:card footer="Travelling Details" title="My TD">
+                        <p class="slds-p-horizontal_small">
+
+                            <lightning:recordForm objectApiName="Travelling_Details__c" layoutType="Full"
+                                recordId="a025g000005gSZFAA2" mode="view" columns="1" />
+                        </p>
+                    </lightning:card>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" padding="horizontal-medium" class="custom-box">
+                <div style="background-color: #6F69AC;">
+                    <h1>Cab Allocation</h1>
+                    <lightning:card footer="Cab Allocation" title="Cab Allocation">
+                        <p class="slds-p-horizontal_small">
+                            <lightning:recordForm objectApiName="Cab_Allocation__c" fields="{!v.fields}"
+                                layoutType="Full" onsuccess="{!c.handleSuccess}" columns="1" />
+                        </p>
+                    </lightning:card>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    <hr />
+
+</aura:component>

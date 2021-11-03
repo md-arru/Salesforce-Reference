@@ -1,0 +1,28 @@
+<aura:component implements="force:apphostable">
+    <div class="header">
+        <h1>
+            <b>WantaCab</b>
+        </h1>
+    </div>
+<div class="details">
+    <b>Book a Company Cab to your destination in city</b>
+    <p>A taxi, also known as a cab or a taxicab, is a type of vehicle for hire with a driver, used by a single passenger or small group of passengers, often for a non-shared ride. A taxicab conveys passengers between locations of their choice. This differs from public transport where the pick-up and drop-off locations are decided by the service provider, not by the customers, although demand responsive transport and share taxis provide a hybrid bus/taxi mode.</p>
+</div>
+
+<div class="slds-align_absolute-center top">
+<lightning:button variant="brand" label="WantaCab" title="Brand" onclick="{!c.handleWant}"/>
+<lightning:button variant="destructive" label="Add User" title="Destructive" onclick="{! c.handleClick }"/>
+</div>
+
+<p class="slds-box slds-text-heading_small">WantaCab is cab service which provides a pickup and drop services for employees in companies and this allocation process will be done on daily basis and mail their employees and drivers after each allocation and also before one hour of departure.
+    <br /><br />
+    <lightning:icon iconName="standard:event" alternativeText="Event" title="Event" />
+    <lightning:icon iconName="standard:address" alternativeText="Address" title="Address" />
+    <lightning:icon iconName="standard:email" alternativeText="Email" title="Email" />
+</p>
+<div class="slds-docked-form-footer footer">
+    <h1>
+        <b>WantaCab &copy;2021 All rights reserved!</b>
+    </h1>
+</div>
+</aura:component>

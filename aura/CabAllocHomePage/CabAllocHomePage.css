@@ -1,0 +1,28 @@
+.THIS.header{
+    font-size: 50px;
+    background-color:#420516;
+    text-align: center;
+    color: #fff;
+}
+.THIS.Brand{
+    padding: 16px;
+    text-align: center;
+}
+.THIS.details{
+    width: 100%;
+    font-size: large;
+    margin: 15px 0;
+}
+.THIS.top{
+    margin-top: 8px;
+}
+
+.THIS.footer{
+    background-color:#420516;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    padding: 16px;
+   
+}

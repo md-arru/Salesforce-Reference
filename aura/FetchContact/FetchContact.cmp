@@ -1,0 +1,27 @@
+<aura:component controller="FetchContact" implements="force:appHostable">
+    <aura:attribute name="myContactData" type="Object"/>
+    <aura:attribute name="columnsToDisplay" type="List"/>
+    <aura:attribute name="searchKeyWord" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+
+
+    <!-- Search Box -->
+        <lightning:layout>
+            <lightning:layoutItem size="3" padding="around-small">
+                <lightning:input aura:id="searchField" 
+                    label = "Contact Name"
+                    value = "{!v.searchKeyWord}"
+                    placeholder="Search Contact"
+                    onchange="{!c.searchContact}"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+
+    
+        <lightning:datatable
+                    data="{!v.myContactData}"
+                    columns="{!v.columnsToDisplay}"
+                    keyField="id"
+                    /> 
+    
+</aura:component>
